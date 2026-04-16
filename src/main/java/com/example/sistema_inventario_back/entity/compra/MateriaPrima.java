@@ -4,7 +4,7 @@ import com.example.sistema_inventario_back.entity.proveedor.UnidadMedida;
 import com.example.sistema_inventario_back.entity.tela.ImagenMateriaPrima;
 import com.example.sistema_inventario_back.entity.tela.Tela;
 import com.example.sistema_inventario_back.entity.usuario.Usuario;
-import jakarta.persistence.*;
+import jakarta.persistence.*; 
 import lombok.*;
 
 import java.math.BigDecimal;

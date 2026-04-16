@@ -139,8 +139,8 @@ public class MateriaPrimaServicelmpl implements MateriaPrimaService {
 
     // Servicio para listar a toda la materia prima paginada (nueva version)
     @Override
-    public MateriaPrimaPageListarDTO getAllMateriaPrima(Pageable pageable) {
-        Page<MateriaPrimaListarDTO> page = materiaPrimaRepository.findAllMateriaPrima(pageable);
+    public MateriaPrimaPageListarDTO getAllMateriaPrima(Pageable pageable, TipoMateriaPrima tipo) {
+        Page<MateriaPrimaListarDTO> page = materiaPrimaRepository.findAllMateriaPrimaByTipo(tipo, pageable);
 
         MateriaPrimaPageListarDTO response = new MateriaPrimaPageListarDTO();
         response.setMateriaPrima(page.getContent());

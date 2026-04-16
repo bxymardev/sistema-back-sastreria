@@ -114,7 +114,9 @@ public class MateriaPrimaController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "idMateriaPrima") String sortBy,
-            @RequestParam(defaultValue = "asc") String sortDir){
+            @RequestParam(defaultValue = "asc") String sortDir,
+            @RequestParam(required = false) TipoMateriaPrima tipo
+    ){
 
         // Validacion de parametros
         int paginaActual = Math.max(page, 0);
@@ -128,7 +130,7 @@ public class MateriaPrimaController {
         // Paginacion con validacion incluida
         Pageable pageable = PageRequest.of(paginaActual, tamanioPagina, sort);
 
-        MateriaPrimaPageListarDTO response = materiaPrimaService.getAllMateriaPrima(pageable);
+        MateriaPrimaPageListarDTO response = materiaPrimaService.getAllMateriaPrima(pageable, tipo);
         return ResponseEntity.ok(response);
     }
 

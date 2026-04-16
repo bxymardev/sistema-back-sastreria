@@ -1,6 +1,7 @@
 package com.example.sistema_inventario_back.service.materia_prima.materia_prima_interface;
 
 import com.example.sistema_inventario_back.dto.materia_prima.*;
+import com.example.sistema_inventario_back.entity.compra.TipoMateriaPrima;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,8 +12,8 @@ public interface MateriaPrimaService {
     // Servicio para crear una materia prima
     MateriaPrimaResponseDTO createMateriaPrima(MateriaPrimaRequestDTO dto, MultipartFile imagen, String username);
 
-    // Servicio para listar todas las materias primas de manera paginada
-    MateriaPrimaPageListarDTO getAllMateriaPrima(Pageable pageable);
+    // Servicio para listar todas las materias primas de manera paginada (con filtro opcional)
+    MateriaPrimaPageListarDTO getAllMateriaPrima(Pageable pageable, TipoMateriaPrima tipo);
 
     // Servicio para listar a materias primas activas
     List<MateriaPrimaActivoDTO> getMateriaPrimaActivos();
