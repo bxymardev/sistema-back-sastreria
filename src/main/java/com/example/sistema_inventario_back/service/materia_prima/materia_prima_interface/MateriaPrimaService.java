@@ -23,4 +23,7 @@ public interface MateriaPrimaService {
 
     // Servicio para ver un preview del color de la tela
     String getPreviewTelaUrl(Integer idCategoriaTela, String colorHex);
+
+    // Servicio para listar materias primas de un proveedor
+    List<MateriaPrimaActivoDTO> getMateriaPrimaByProveedorId(Integer idProveedor);
 }

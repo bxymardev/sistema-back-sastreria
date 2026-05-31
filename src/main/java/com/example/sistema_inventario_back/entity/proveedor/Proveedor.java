@@ -1,11 +1,8 @@
 package com.example.sistema_inventario_back.entity.proveedor;
 
-import com.example.sistema_inventario_back.entity.compra.MateriaPrima;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter

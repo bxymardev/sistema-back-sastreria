@@ -5,7 +5,6 @@ import com.example.sistema_inventario_back.entity.tela.CategoriaTela;
 import com.example.sistema_inventario_back.entity.tela.Tela;
 import com.example.sistema_inventario_back.repository.tela.CategoriaTelaRepository;
 import com.example.sistema_inventario_back.repository.tela.TelaRepository;
-import com.example.sistema_inventario_back.service.tela.tela_interface.ImagenMateriaPrimaService;
 import com.example.sistema_inventario_back.service.tela.tela_interface.TelaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,9 +24,6 @@ public class TelaServiceImpl implements TelaService {
 
     @Autowired
     private CategoriaTelaRepository categoriaTelaRepository;
-
-    @Autowired
-    private ImagenMateriaPrimaService imagenMateriaPrimaService;
 
     // Servicio para crear un nuevo una nueva tela
     @Override

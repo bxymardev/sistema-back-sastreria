@@ -7,7 +7,6 @@ import com.example.sistema_inventario_back.entity.tela.ImagenMateriaPrima;
 import com.example.sistema_inventario_back.entity.tela.Tela;
 import com.example.sistema_inventario_back.entity.usuario.Usuario;
 import com.example.sistema_inventario_back.repository.compra.MateriaPrimaRepository;
-import com.example.sistema_inventario_back.repository.proveedor.ProveedorRepository;
 import com.example.sistema_inventario_back.repository.tela.CategoriaTelaRepository;
 import com.example.sistema_inventario_back.repository.usuario.UserRepository;
 import com.example.sistema_inventario_back.service.CloudinaryServiceImpl;
@@ -34,9 +33,6 @@ public class MateriaPrimaServicelmpl implements MateriaPrimaService {
     private UserRepository userRepository;
 
     @Autowired
-    private ProveedorRepository proveedorRepository;
-
-    @Autowired
     private CategoriaTelaRepository categoriaTelaRepository;
 
     @Autowired
@@ -49,6 +45,12 @@ public class MateriaPrimaServicelmpl implements MateriaPrimaService {
     @Override
     public List<MateriaPrimaActivoDTO> getMateriaPrimaActivos() {
         return materiaPrimaRepository.findAllByEstadoActivo();
+    }
+
+    // Servicio para listar materias primas de un proveedor
+    @Override
+    public List<MateriaPrimaActivoDTO> getMateriaPrimaByProveedorId(Integer idProveedor) {
+        return materiaPrimaRepository.findMateriasPrimasByProveedorId(idProveedor);
     }
 
     // Servicio para crear una nueva materia prima tipo tela
@@ -164,28 +166,7 @@ public class MateriaPrimaServicelmpl implements MateriaPrimaService {
         String hexLimpio = colorHex.replace("#", "");
         return cloudinaryService.generarUrlConColor(categoriaTela.getImagenBasePublicId(), hexLimpio);
     }
-
-    // Convierte RequestDTO a entidad
-    private MateriaPrima matToEntity(MateriaPrimaRequestDTO dto, String username){
-
-        Usuario usuario = userRepository.findByNombreUsuario(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        MateriaPrima materiaPrima = new MateriaPrima();
-        materiaPrima.setNombreMateriaPrima(dto.getNombreMateriaPrima());
-        materiaPrima.setMarca(dto.getMarca());
-        materiaPrima.setModelo(dto.getModelo());
-        materiaPrima.setStockActual(dto.getStockActual() != null ? dto.getStockActual() : 0.0);
-        materiaPrima.setStockMinimo(dto.getStockMinimo());
-        materiaPrima.setUnidadMedida(dto.getUnidadMedida());
-        materiaPrima.setTipoMateriaPrima(dto.getTipoMateriaPrima());
-        materiaPrima.setUbicacionAlmacen(dto.getUbicacionAlmacen());
-        materiaPrima.setEstadoMateriaPrima(EstadoMateriaPrima.ACTIVO);
-        materiaPrima.setUsuario(usuario);
-
-        return materiaPrima;
-    }
-
+    
     // Convierte entidad a ResponseDTO
     private MateriaPrimaResponseDTO matToResponseDTO(MateriaPrima materiaPrima){
         MateriaPrimaResponseDTO response = new MateriaPrimaResponseDTO();

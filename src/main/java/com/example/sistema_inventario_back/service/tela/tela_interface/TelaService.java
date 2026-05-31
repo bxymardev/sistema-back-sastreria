@@ -3,9 +3,7 @@ package com.example.sistema_inventario_back.service.tela.tela_interface;
 import com.example.sistema_inventario_back.dto.tela.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
-import java.util.List;
 
 public interface TelaService {
 

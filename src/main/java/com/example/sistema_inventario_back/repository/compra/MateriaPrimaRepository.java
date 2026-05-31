@@ -61,4 +61,17 @@ public interface MateriaPrimaRepository extends JpaRepository<MateriaPrima, Inte
     Page<MateriaPrimaListarDTO> findAllMateriaPrimaByTipo(
             @Param("tipo") TipoMateriaPrima tipo,
             Pageable pageable);
+
+    @Query("""
+            SELECT DISTINCT new com.example.sistema_inventario_back.dto.materia_prima.MateriaPrimaActivoDTO(
+                 mp.idMateriaPrima,
+                 mp.nombreMateriaPrima,
+                 mp.precioUnitarioActual
+            )
+            FROM Compra c
+            JOIN c.compraDetalles cd
+            JOIN cd.materiaPrima mp
+            WHERE c.proveedor.idProveedor = :idProveedor
+            """)
+    List<MateriaPrimaActivoDTO> findMateriasPrimasByProveedorId(@Param("idProveedor") Integer idProveedor);
 }
