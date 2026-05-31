@@ -10,8 +10,9 @@ public class ClienteResponseDTO {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String carnetIdentidad;
-    private String telefono1;
-    private String telefono2;
+    private String telefonoUno;
+    private String telefonoDos;
     private LocalDateTime fechaRegistro;
+    private LocalDateTime fechaActualizacion;
     private Boolean estado;
 }

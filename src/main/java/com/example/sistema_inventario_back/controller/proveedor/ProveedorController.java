@@ -2,13 +2,11 @@ package com.example.sistema_inventario_back.controller.proveedor;
 
 import com.example.sistema_inventario_back.dto.materia_prima.ProveedorActivoDTO;
 import com.example.sistema_inventario_back.dto.proveedor.proveedor.*;
-import com.example.sistema_inventario_back.dto.proveedor.representante.RepresentanteResponseDTO;
 import com.example.sistema_inventario_back.pdfexporter.ProveedorPdfExporter;
 import com.example.sistema_inventario_back.service.proveedor.proveedor_interface.ProveedorService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.hibernate.sql.ast.tree.predicate.BooleanExpressionPredicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

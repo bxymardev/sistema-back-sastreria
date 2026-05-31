@@ -6,9 +6,10 @@ import lombok.Data;
 
 @Data
 public class ClienteRequestDTO {
+
     @NotBlank(message = "El nombre es obligatorio")
-    @Size(max = 50, message = "El nombre no debe exceder 50 caracteres")
-    private String nombre;
+    @Size(max = 100, message = "El nombre no debe exceder 100 caracteres")
+    private String nombres;
 
     @NotBlank(message = "El apellido paterno es obligatorio")
     @Size(max = 50, message = "El apellido paterno no debe exceder 50 caracteres")
@@ -21,10 +22,10 @@ public class ClienteRequestDTO {
     @Size(max = 20, message = "El carnet de identidad no debe exceder más de 20 caracteres")
     private String carnetIdentidad;
 
-    @NotBlank(message = "El primer telefono es obligatorio")
-    @Size(max = 15, message = "El telefono principal no debe exceder 15 caracteres")
-    private String telefono1;
+    @NotBlank(message = "El primer teléfono es obligatorio")
+    @Size(max = 15, message = "El teléfono principal no debe exceder 15 caracteres")
+    private String telefonoUno;
 
-    @Size(max = 15, message = "El telefono alternativo no debe exceder 15 caracteres")
-    private String telefono2;
+    @Size(max = 15, message = "El teléfono alternativo no debe exceder 15 caracteres")
+    private String telefonoDos;
 }

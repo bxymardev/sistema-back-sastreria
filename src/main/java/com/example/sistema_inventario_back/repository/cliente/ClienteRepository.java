@@ -15,10 +15,10 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer>, JpaS
     @Query("""
            SELECT new com.example.sistema_inventario_back.dto.cliente.ClienteListarDTO(
             c.idCliente,
-            c.nombre,
+            c.nombres,
             c.apellidoPaterno,
             c.apellidoMaterno,
-            c.telefono1
+            c.telefonoUno
            )
            FROM Cliente c
            WHERE c.estadoCliente = true
