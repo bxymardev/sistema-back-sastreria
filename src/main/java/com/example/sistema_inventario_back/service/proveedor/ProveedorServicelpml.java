@@ -70,6 +70,11 @@ public class ProveedorServicelpml implements ProveedorService {
         return responseDTO;
     }
 
+    @Override
+    public List<ProveedorListarDTO> getAllProveedoresSinPaginacion(Boolean estado) {
+        return proveedorRepository.findAllResumenSinPaginacion(estado);
+    }
+
     //Servicio para actualizar el proveedor
     @Override
     public ProveedorResponseDTO updateProveedor(Integer id, ProveedorRequestDTO proveedorRequestDTO){

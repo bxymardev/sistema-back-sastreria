@@ -34,4 +34,7 @@ public interface ProveedorService {
 
     // Servicio para listar proveedores activos
     List<ProveedorActivoDTO> getProveedoresActivos();
+
+    // Servicio para listar a todos los proveedores sin paginacion
+    List<ProveedorListarDTO> getAllProveedoresSinPaginacion(Boolean estado);
 }

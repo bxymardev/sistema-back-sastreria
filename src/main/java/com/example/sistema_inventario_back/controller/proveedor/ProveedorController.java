@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @CrossOrigin
@@ -94,6 +97,16 @@ public class ProveedorController {
 
         return proveedorService.getAllProveedores(pageable);
     }
+
+    // Controlador paara listar a todos los proveedores sin paginación
+    @GetMapping("/listar_proveedores/todos")
+    public ResponseEntity<List<ProveedorListarDTO>> getAllProveedoresSinPaginacionController(
+        @RequestParam(required = false) Boolean estado
+    ) {
+        List<ProveedorListarDTO> response = proveedorService.getAllProveedoresSinPaginacion(estado);
+        return ResponseEntity.ok(response);
+    }
+    
 
     //Controlador para buscar un proveedor por id
     @GetMapping("/buscar_proveedor/{id}")

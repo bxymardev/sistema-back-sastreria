@@ -102,4 +102,31 @@ public interface ProveedorRepository extends JpaRepository<Proveedor, Integer>, 
     @Query("SELECT new com.example.sistema_inventario_back.dto.materia_prima.ProveedorActivoDTO(p.idProveedor, p.nombreComercial) " +
             "FROM Proveedor p WHERE p.estado = true ORDER BY p.nombreComercial ASC")
     List<ProveedorActivoDTO> findAllByEstadoTrue();
+
+
+    // Consulta SQL para listar a todos los proveedores sin paginación
+    @Query("""     
+        SELECT new com.example.sistema_inventario_back.dto.proveedor.proveedor.ProveedorListarDTO(
+            p.idProveedor,
+            p.nombresEncargado,
+            p.nombreComercial,
+            p.identificacionFiscal,
+            p.fechaCreacion,
+            p.numeroUno,
+            p.numeroDos,
+            p.tipoProveedor,
+            p.estado,
+            COALESCE(SUM(c.totalCompra), 0.00),
+            MAX(c.fechaCompra)
+        )
+
+        FROM Proveedor p
+        LEFT JOIN Compra c ON c.proveedor.idProveedor = p.idProveedor
+        WHERE (:estado IS NULL OR p.estado = :estado)
+        GROUP BY
+            p.idProveedor, p.nombresEncargado, p.nombreComercial,
+            p.identificacionFiscal, p.fechaCreacion, p.numeroUno,
+            p.numeroDos, p.tipoProveedor, p.estado
+    """)
+    List<ProveedorListarDTO> findAllResumenSinPaginacion(@Param("estado") Boolean estado);
 }
