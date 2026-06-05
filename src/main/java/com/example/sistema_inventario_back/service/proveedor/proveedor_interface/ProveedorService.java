@@ -21,7 +21,7 @@ public interface ProveedorService {
     ProveedorResponseDTO getProveedorById(Integer id);
 
     //Servicio para actualizar el Proveedor
-    ProveedorResponseDTO updateProveedor(Integer id, ProveedorRequestDTO proveedorRequestDTO);
+    ProveedorResponseDTO updateProveedor(Integer id, ProveedorUpdateDTO proveedorRequestDTO);
 
     // Servicio para buscar un proveedor por filtros multiples
     ProveedorPageListarDTO buscarProveedorConFiltros(String searchTerm, Pageable pageable);

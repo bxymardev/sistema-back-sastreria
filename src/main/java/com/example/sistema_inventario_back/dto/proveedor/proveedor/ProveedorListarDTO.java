@@ -16,6 +16,7 @@ public class ProveedorListarDTO {
     private String nombresEncargado;
     private String nombreComercial;
     private String identificacionFiscal;
+    private String direccion;
     private LocalDateTime fechaCreacion;
     private String numeroUno;
     private String numeroDos;

@@ -121,9 +121,9 @@ public class ProveedorController {
     @PutMapping("/actualizar_proveedor/{id}")
     public ResponseEntity<ProveedorResponseDTO> getUpdateProveedorController(
             @PathVariable Integer id,
-            @Valid @RequestBody ProveedorRequestDTO proveedorRequestDTO
+            @Valid @RequestBody ProveedorUpdateDTO proveedorUpdateDTO
     ){
-        ProveedorResponseDTO proveedor = proveedorService.updateProveedor(id, proveedorRequestDTO);
+        ProveedorResponseDTO proveedor = proveedorService.updateProveedor(id, proveedorUpdateDTO);
         return ResponseEntity.ok(proveedor);
     }
 

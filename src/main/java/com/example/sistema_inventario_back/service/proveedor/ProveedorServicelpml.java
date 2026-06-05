@@ -77,18 +77,28 @@ public class ProveedorServicelpml implements ProveedorService {
 
     //Servicio para actualizar el proveedor
     @Override
-    public ProveedorResponseDTO updateProveedor(Integer id, ProveedorRequestDTO proveedorRequestDTO){
+    public ProveedorResponseDTO updateProveedor(Integer id, ProveedorUpdateDTO proveedorUpdateDTO){
         Proveedor proveedor = proveedorRepository.findById(id)
                 .orElseThrow(() -> new ProveedorNoEncontradoException(id));
 
-        proveedor.setNombreComercial(proveedorRequestDTO.getNombreComercial().toUpperCase());
-        proveedor.setIdentificacionFiscal(proveedorRequestDTO.getIdentificacionFiscal().toUpperCase());
-        proveedor.setDireccion(proveedorRequestDTO.getDireccion().toUpperCase());
-        proveedor.setTipoProveedor(proveedorRequestDTO.getTipoProveedor());
+        proveedor.setNombresEncargado(proveedorUpdateDTO.getNombresEncargado().toUpperCase());
+        proveedor.setNombreComercial(proveedorUpdateDTO.getNombreComercial().toUpperCase());
+        proveedor.setDireccion(proveedorUpdateDTO.getDireccion().toUpperCase());
+        proveedor.setTipoProveedor(proveedorUpdateDTO.getTipoProveedor());
+        proveedor.setNumeroUno(proveedorUpdateDTO.getTelefono1());
+        proveedor.setIdentificacionFiscal(proveedorUpdateDTO.getIdentificacionFiscal().toUpperCase());
         proveedor.setFechaActualizacion(LocalDateTime.now());
 
-        Proveedor proveedorActualizado = proveedorRepository.save(proveedor);
+        // Campos opcionales
+        if (proveedorUpdateDTO.getIdentificacionFiscal() != null){
+            proveedor.setIdentificacionFiscal(proveedorUpdateDTO.getIdentificacionFiscal());
+        }
 
+        if (proveedorUpdateDTO.getTelefono2() != null){
+            proveedor.setNumeroDos(proveedorUpdateDTO.getTelefono2());
+        }
+
+        Proveedor proveedorActualizado = proveedorRepository.save(proveedor);
         return matToResponseDTO(proveedorActualizado);
     }
 
