@@ -20,6 +20,9 @@ public interface ProveedorService {
     //Servicio para obtener un Proveedor por ID
     ProveedorResponseDTO getProveedorById(Integer id);
 
+    // Servicio para obtener el detalle completo de un proveedor
+    ProveedorDetalleDTO getDetalleProveedor(Integer id);
+
     //Servicio para actualizar el Proveedor
     ProveedorResponseDTO updateProveedor(Integer id, ProveedorUpdateDTO proveedorRequestDTO);
 

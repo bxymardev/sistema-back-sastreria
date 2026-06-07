@@ -127,6 +127,15 @@ public class ProveedorController {
         return ResponseEntity.ok(proveedor);
     }
 
+    // Controlador para obtener el detalle completo de un proveedor
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<ProveedorDetalleDTO> getDetalleProveedorController(
+        @PathVariable Integer id 
+    ) {
+        ProveedorDetalleDTO detalle = proveedorService.getDetalleProveedor(id);
+        return ResponseEntity.ok(detalle);
+    }
+
     //Controlador para exportar pdf
     @GetMapping("/exportar/pdf/{id}")
     public void exportarProveedorPorId(

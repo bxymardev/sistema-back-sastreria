@@ -6,6 +6,8 @@ import com.example.sistema_inventario_back.entity.proveedor.Proveedor;
 import com.example.sistema_inventario_back.exception.proveedor.ProveedorNoEncontradoException;
 import com.example.sistema_inventario_back.repository.proveedor.ProveedorRepository;
 import com.example.sistema_inventario_back.service.proveedor.proveedor_interface.ProveedorService;
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -86,16 +88,19 @@ public class ProveedorServicelpml implements ProveedorService {
         proveedor.setDireccion(proveedorUpdateDTO.getDireccion().toUpperCase());
         proveedor.setTipoProveedor(proveedorUpdateDTO.getTipoProveedor());
         proveedor.setNumeroUno(proveedorUpdateDTO.getTelefono1());
-        proveedor.setIdentificacionFiscal(proveedorUpdateDTO.getIdentificacionFiscal().toUpperCase());
         proveedor.setFechaActualizacion(LocalDateTime.now());
 
         // Campos opcionales
-        if (proveedorUpdateDTO.getIdentificacionFiscal() != null){
+        if (proveedorUpdateDTO.getIdentificacionFiscal() != null && !proveedorUpdateDTO.getIdentificacionFiscal().isBlank()){
             proveedor.setIdentificacionFiscal(proveedorUpdateDTO.getIdentificacionFiscal());
+        }else{
+            proveedor.setIdentificacionFiscal(null);
         }
 
-        if (proveedorUpdateDTO.getTelefono2() != null){
+        if (proveedorUpdateDTO.getTelefono2() != null && !proveedorUpdateDTO.getTelefono2().isBlank()){
             proveedor.setNumeroDos(proveedorUpdateDTO.getTelefono2());
+        }else{
+            proveedor.setNumeroDos(null);
         }
 
         Proveedor proveedorActualizado = proveedorRepository.save(proveedor);
@@ -110,6 +115,14 @@ public class ProveedorServicelpml implements ProveedorService {
                 .orElseThrow(() -> new RuntimeException("Proveedor no encontrado con id: " +id));
 
         return matToResponseDTO(proveedor);
+    }
+
+    // Servicio para mostrar los detalles del proveedor
+    public ProveedorDetalleDTO getDetalleProveedor(Integer id) {
+        Proveedor proveedor = proveedorRepository.findById(id)
+            .orElseThrow(() -> new ProveedorNoEncontradoException(id));
+
+        return mapToDetalleDTO(proveedor);
     }
 
     // Servicio para la filtracion
@@ -189,6 +202,25 @@ public class ProveedorServicelpml implements ProveedorService {
         dto.setTipoProveedor(proveedor.getTipoProveedor());
         dto.setFechaCreacion(proveedor.getFechaCreacion());
         dto.setFechaActualizacion(proveedor.getFechaActualizacion());
+        return dto;
+    }
+
+    private ProveedorDetalleDTO mapToDetalleDTO(Proveedor proveedor){
+        ProveedorDetalleDTO dto = new ProveedorDetalleDTO();
+
+        dto.setIdProveedor(proveedor.getIdProveedor());
+        dto.setNombreComercial(proveedor.getNombreComercial());
+        dto.setNombresEncargado(proveedor.getNombresEncargado());
+        dto.setIdentificacionFiscal(proveedor.getIdentificacionFiscal());
+        dto.setNumeroUno(proveedor.getNumeroUno());
+        dto.setNumeroDos(proveedor.getNumeroDos());
+        dto.setDireccion(proveedor.getDireccion());
+        dto.setTipoProveedor(proveedor.getTipoProveedor());
+        dto.setEstado(proveedor.getEstado());
+        dto.setMotivoEliminacion(proveedor.getMotivoEliminacion());
+        dto.setFechaCreacion(proveedor.getFechaCreacion());
+        dto.setFechaActualizacion(proveedor.getFechaActualizacion());
+
         return dto;
     }
 }
